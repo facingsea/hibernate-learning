@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.c_relate.d_one2one.domain">
+	<class name="Company2" table="company2">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 一对一  主键关联-->
+		<!-- unique=true会创建该列的唯一性约束 -->
+		<many-to-one name="address2" class="Address2">
+		</many-to-one>
+	</class>
+</hibernate-mapping>

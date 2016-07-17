@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.c_relate.d_one2one.domain">
+	<class name="Address" table="address">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 一对一  外键关联-->
+		<!-- 
+			property-ref 引用Company类中 用于生成外键 属性名称
+			用于指定关联时应该关联的字段：如Company类中的address属性。
+		 -->
+		<one-to-one name="company" class="Company" property-ref="address"></one-to-one>
+	</class>
+</hibernate-mapping>

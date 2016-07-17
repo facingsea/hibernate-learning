@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.c_relate.d_one2one.domain">
+	<class name="Address2" table="address2">
+		<id name="id" column="id" type="integer">
+			<!-- 由Company2主键生成 自己的主键 -->
+			<generator class="foreign">
+				<!-- 与Address类的company属性对应对象，生成主键
+					即，按照company的id来生成自己的id
+				 -->
+				<param name="property">company2</param>
+			</generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 一对一  主键关联-->
+		<!-- 
+			constrained(约束):指定为当前持久化类对应的数据库表的主键添加一个外键约束，引用被关联的对象(“对方”)所对应的数据库表主键
+			•  one-to-one标签的含义，指示hibernate怎么加载它的关联对象，默认根据主键加载，   
+               constrained="true"， 表明当前主键上存在一个约束，address表的主键作为外键参照了company表
+			       参考链接 http://ryxxlong.iteye.com/blog/622652
+		-->
+
+		<one-to-one name="company2" class="Company2" constrained="true"></one-to-one>
+	</class>
+</hibernate-mapping>
