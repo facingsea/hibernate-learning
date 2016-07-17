@@ -39,4 +39,10 @@ public class Customer {
 		this.city = city;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", name=" + name + ", age=" + age + ", city=" + city + "]";
+	}
+	
+
 }
