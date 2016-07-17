@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping package="com.facingsea.exercise.b_part.domain">
+	<class name="Customer" table="CUSTOMER" select-before-update="true">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		<property name="age" column="age" type="integer"></property>
+		<property name="city" column="city" type="string"></property>
+	</class>
+</hibernate-mapping>
