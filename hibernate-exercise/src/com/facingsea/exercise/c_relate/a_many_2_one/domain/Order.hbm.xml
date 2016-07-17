@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.c_relate.a_many_2_one.domain">
+	<class name="Order" table="orders">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="price" column="price" type="double" precision="4"></property>
+		
+		
+		<many-to-one name="customer" class="Customer" column="customer_id" cascade="save-update">
+		</many-to-one>
+	</class>
+</hibernate-mapping>
