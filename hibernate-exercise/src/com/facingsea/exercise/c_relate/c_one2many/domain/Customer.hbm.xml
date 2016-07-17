@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.c_relate.c_one2many.domain">
+	<class name="Customer" table="customer">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		<property name="register" column="register" type="timestamp"></property>
+		
+		<!-- 一对多 -->
+		<!-- delete-orphan 主要用于一对多 ，在一的一方使用（在父方） -->
+		<set name="orders" cascade="save-update,delete,delete-orphan" lazy="false" inverse="true">
+			<key column="customer_id" ></key>
+			<one-to-many class="Order"/>
+		</set>
+	</class>
+</hibernate-mapping>
