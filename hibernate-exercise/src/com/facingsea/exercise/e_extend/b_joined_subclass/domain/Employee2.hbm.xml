@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.e_extend.b_joined_subclass.domain">
+	<class name="Employee2" table="employee2">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 
+			joined-subclass: 用于映射HourEmployee2类
+			table：子类对应表
+			key子元素：指定该表中即作为主键又作为外键的字段
+			property：指定表中的列
+		 -->
+		<joined-subclass name="HourEmployee2" table="hour_employee2">
+			<key column="eid"></key>
+			<property name="rate" column="rate" type="double"></property>
+		</joined-subclass>
+		
+		<joined-subclass name="SalaryEmployee2" table="salary_employee2">
+			<key column="eid"></key>
+			<property name="salary" column="salary" type="double"></property>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
