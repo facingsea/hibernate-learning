@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.d_component.domain">
+	<class name="Person" table="person">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 配置组件，使用Component元素 -->
+		<component name="homeAddress" class="Address">
+			<!-- 组件类中 持久化对象属性名 -->
+			<parent name="person"/>
+			<!-- 组件属性 -->
+			<property name="province" column="home_address" type="string"></property>
+			<property name="city" column="city_address" type="string"></property>
+		</component>
+		<component name="workAddress" class="Address">
+			<parent name="person"/>
+			<property name="province" column="work_address" type="string"></property>
+			<property name="city" column="work_city" type="string"></property>
+		</component>
+	</class>	
+</hibernate-mapping>    
