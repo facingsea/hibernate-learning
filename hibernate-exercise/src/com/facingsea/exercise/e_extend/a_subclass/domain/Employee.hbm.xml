@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.e_extend.a_subclass.domain">
+	<!-- discriminator-value="ee" 映射父类员工etype的值 -->
+	<class name="Employee" table="employee" discriminator-value="ee">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- discriminator用于指定employee表中用于区分员工类型etype的字段
+			column="etype"这里etype用于存放员工的类型，必须在id的后面
+		 -->
+		<discriminator column="etype" type="string"></discriminator>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- subclass用于映射HourEmployee
+			name: 指定映射的类名
+			discriminator-value: 指定员工类型etype字段的 值
+			这种映射方式要求employee表中和子类属性对应的字段允许为空
+		 -->
+		<subclass name="HourEmployee" discriminator-value="he">
+			<property name="rate" column="rate" type="double"></property>
+		</subclass>
+		<subclass name="SalaryEmployee" discriminator-value="se">
+			<property name="salary" column="salary" type="double"></property>
+		</subclass>
+	</class>
+</hibernate-mapping>
