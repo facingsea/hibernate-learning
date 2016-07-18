@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.e_extend.c_union_subclass.domain">
+	<class name="Employee3" table="employee3">
+		<id name="id" column="id" type="integer">
+			<!-- 不能使用native -->
+			<generator class="increment"></generator>
+		</id>
+		<property name="name" column="name" type="string"></property>
+		
+		<!-- 
+			union-subclass: 连接子类
+		 -->
+		<union-subclass name="HourEmployee3" table="hour_employee3">
+			<property name="rate" column="rate" type="double"></property>
+		</union-subclass>
+		<union-subclass name="SalaryEmployee3" table="salary_employee3">
+			<property name="salary" column="salary" type="double"></property>
+		</union-subclass>
+	</class>
+</hibernate-mapping>
