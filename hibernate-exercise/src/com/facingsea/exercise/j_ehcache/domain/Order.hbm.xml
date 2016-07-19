@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.facingsea.exercise.j_ehcache.domain">
+	<class name="Order" table="order_cache">
+		<id name="id" column="id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="price" column="price" type="double"></property>
+		
+		<many-to-one name="customer" class="Customer" column="customer_id" lazy="no-proxy">
+		</many-to-one>
+	</class>
+	
+	<query name="findOrdersByCustomerName">
+		<![CDATA[ from Order where customer.name = ? ]]>
+	</query>
+</hibernate-mapping>

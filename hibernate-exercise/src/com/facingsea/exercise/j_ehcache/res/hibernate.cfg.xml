@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory >
+		
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/exercise</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">1234</property>
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- 启用c3p0 -->
+		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
+		<!--在连接池中可用的数据库连接的最少数目 -->
+		<property name="c3p0.min_size">5</property>
+		<!--在连接池中所有数据库连接的最大数目  -->
+		<property name="c3p0.max_size">20</property>
+		<!--设定数据库连接的过期时间,以秒为单位,
+		如果连接池中的某个数据库连接处于空闲状态的时间超过了timeout时间,就会从连接池中清除 -->
+		<property name="c3p0.timeout">120</property>
+		 <!--每3000秒检查所有连接池中的空闲连接 以秒为单位-->
+		<property name="c3p0.idle_test_period">3000</property>
+		<!-- 设置是否自动提交 -->
+		<property name="connection.autocommit">false</property>
+		
+		<!-- 避免在c3p0在读取数据库信息时抛异常 -->
+		<!-- 
+			错误信息如：
+			HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+		 -->
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+		
+		
+		<!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+		
+		
+		<!-- 开启二级缓存 -->
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<!-- 配置ehcache -->
+        <property name="cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</property>
+        <property name="hibernate.cache.provider_configuration_file_resource_path">com/facingsea/exercise/j_ehcache/res/ehcache.xml</property>
+		<!-- 开启查询缓存 -->
+		<property name="hibernate.cache.use_query_cache">true</property>
+
+		<mapping resource="com/facingsea/exercise/j_ehcache/domain/Customer.hbm.xml"/>
+		<mapping resource="com/facingsea/exercise/j_ehcache/domain/Order.hbm.xml"/>
+		
+		
+		<!-- 配置类级别二级缓存需要缓存的类 -->
+		<class-cache usage="read-write" class="com.facingsea.exercise.j_ehcache.domain.Customer"/>
+		<!-- <class-cache usage="read-write" class="com.facingsea.exercise.j_ehcache.domain.Order"/> -->
+		
+		<!-- 配置类级别二级缓存需要缓存的集合 -->
+		<collection-cache usage="read-write" collection="com.facingsea.exercise.j_ehcache.domain.Customer.orders"/>
+		
+	</session-factory>
+</hibernate-configuration>
